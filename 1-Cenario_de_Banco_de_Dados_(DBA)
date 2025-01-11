@@ -1,0 +1,7 @@
+- Para otimizar a performance de consultas de logs recentes (últimos 7 dias), seria ideal aplicar um conjunto de práticas que garantam maior eficiência nas operações de leitura como particionamento da tabela, indexação das colunas principais, backup de logs antigos, cache de consultas frequentes e manutenção regular da tabela.
+Portanto, uma solução possível para esse cenário seria implementar:
+1. Particionamento da tabela por dia. Como a tabela cresce muito, o particionamento diário faz com que as consultas acessem rapidamente apenas as partições relevantes.
+2. Criar índices nas colunas frequentemente usadas nas consultas. Nesse caso, ter um índice sobre a coluna de data, e outras colunas principais utilizadas em joins e filtros, permitiria uma maior eficiência.
+3. Backup automático de logs antigos. Transferir os logs antigos e pouco acessados para uma tabela de histórico permitiria uma tabela principal mais performática.
+4. Cache de consultas frequentes. Caso a consulta seja repetida muitas vezes, é possível armazenar o resultado da primeira execução no cache e nas consultas subsequentes buscar o resultado do cache, ajudando a reduzir a carga no banco de dados.
+5. Manutenção regular da tabela. Executar processos de vacuum, analyze e reindex para garantir que os índices sejam mantidos otimizados.
