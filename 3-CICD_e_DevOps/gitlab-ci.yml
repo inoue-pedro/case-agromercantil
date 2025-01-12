@@ -1,0 +1,50 @@
+stages:
+  - validate
+  - test
+  - deploy
+
+variables:
+  AIRFLOW_HOME: "/opt/airflow"
+  DAG_PATH: "dags"
+  SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK" # URL do Slack
+
+# Validação de código: Verifica erros de sintaxe e estilo
+validate_code:
+  stage: validate
+  script:
+    - echo "Validando código..."
+    - python -m py_compile $(find . -name "*.py")  # Verifica erros de sintaxe
+    - flake8 .  # Verifica problemas de estilo de código (PEP8)
+  allow_failure: false  # Se falhar, o pipeline será interrompido
+
+# Testes automáticos: Executa testes unitários e testes das DAGs
+test_dags:
+  stage: test
+  script:
+    - echo "Executando testes..."
+    - pip install -r requirements.txt  # Instalar dependências
+    - pytest tests/  # Executa testes unitários (ajuste conforme necessário)
+    - airflow dags test <dag_id> <execution_date>  # Teste das DAGs
+  allow_failure: false  # Se falhar, o pipeline será interrompido
+
+# Deploy das DAGs no Airflow, apenas no branch principal
+deploy:
+  stage: deploy
+  script:
+    - echo "Fazendo deploy das DAGs no Airflow..."
+    - airflow webserver &  # Inicia o servidor web do Airflow
+    - airflow scheduler &  # Inicia o scheduler do Airflow
+    - git pull origin master  # Puxa as últimas mudanças para o ambiente de produção
+  only:
+    - master  # Só realiza deploy no branch master
+
+# Alerta de falha no Slack
+notify_failure:
+  stage: deploy
+  script:
+    - |
+      if [[ "$CI_JOB_STATUS" == "failed" ]]; then
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"🚨 Alerta de falha no pipeline CI/CD!"}' $SLACK_WEBHOOK_URL
+      fi
+  when: on_failure  # Envia o alerta apenas em caso de falha
+  allow_failure: true  # Permite que o pipeline continue, mas notifica a falha
