@@ -1,0 +1,19 @@
+Para garantir que o ambiente de produção esteja seguro contra deploys com falhas é importante que este seja realizado de forma controlada, testada e monitorada. Podemos adotar algumas práticas como:
+1. Automatização de Testes e Validações
+  A. Testes Automatizados
+  Testes unitários: testes básicos que verificam se as partes menores do código (funções e métodos) estão funcionando conforme esperado.
+  Testes de integração: verificam se os componentes do sistema (como APIs, bancos de dados, etc.) interagem corretamente entre si.
+  Testes end-to-end (E2E): testam o fluxo completo da aplicação de ponta a ponta para garantir que tudo funcione como esperado.
+  Testes de DAGs do Apache Airflow: testes automáticos nas DAGs.
+
+  B. Testes em Ambientes de Staging
+  Implementar um ambiente de staging (pré-produção) que seja o mais próximo possível do ambiente de produção. Isso permite validar as mudanças em um ambiente controlado, sem afetar os usuários finais.
+  
+  C. Testes de Performance
+  Se a alteração no código impactar a performance, é fundamental realizar testes de carga e performance no ambiente de staging para garantir que o novo código não cause degradação no sistema.
+
+2. Rollback Automático e Manual
+Configurar o pipeline CI/CD para realizar um rollback automático em caso de falha no deploy. Caso o deploy seja realizado com sucesso, e a seguir note-se alguma falha na integridade dos processos, é essencial uma estratégia fácil de roolback manual.
+
+3. Revisão e Monitoramento
+Muito imnportante fazer a verificação de código antes do merge, utilizando um fluxo onde as alterações do código sejam revisadas e aprovadas por outros membros da equipe. Ainda mais, ter um páinel de monitoramento auxilia na identificação rápida de possíveis bugs causados pelo deploy e ação rápida para correção.
