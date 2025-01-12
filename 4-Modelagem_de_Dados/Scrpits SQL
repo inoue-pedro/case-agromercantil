@@ -1,0 +1,27 @@
+Baseado no esquema ER
+
+- Produtos mais vendidos (top 10 a partir de 2024) :
+
+  select orders.product_id,  products.name as produto, count(*) as total_vendido
+  from orders
+  left join products on orders.product_id =  products.id
+  where orders.date_partiton >= '2024-01-01'
+  group by 1,2
+  order by 3 desc
+  limit 10
+
+- Listar histórico de compras de um cliente especifíco :
+
+  select orders.*
+  from orders
+  left join customers on orders.customer_id = customers.id
+  where customers.name = ‘Pedro Inoue‘
+  and customers.id = '123'
+  order by sales.created_at desc
+
+- Calcular o faturamento mensal :
+
+  select date_format(created_at, ‘yyyy-MM’) as mes, sum(total_value) as faturamento
+  from orders
+  group by 1
+  order by 1 desc
