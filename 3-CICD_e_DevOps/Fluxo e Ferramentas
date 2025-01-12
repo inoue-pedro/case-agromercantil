@@ -1,0 +1,11 @@
+Para configurar um pipeline CI/CD que realize as ações solicitadas, poderíamos utilizar ferramentas como GitLab CI/CD ou Jenkins, Airflow para as dags, integrados com ferramentas de monitoramento e notificação como Slack ou PagerDuty.
+De uma maneira geral, o fluxo do pipeline CI/CD pode ser descrito como:
+  1. Commit de código / Pull Request →
+  2. Pipeline CI/CD é acionado →
+  3. Validação de código (Syntax, Linting, Dependências) →
+  4. Execução de testes automatizados (Unitários e DAGs no Airflow) →
+  5. Verificação de falhas (Erros no código ou nas DAGs) →
+  6. Alerta em caso de falha (Slack, e-mail, PagerDuty, etc.) →
+  7. Deploy para produção (Atualização das DAGs no Airflow) →
+  8. Execução programada das DAGs em produção →
+  9. Monitoramento contínuo (Verificação do status das DAGs e envio de alertas).
