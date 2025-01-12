@@ -1,0 +1,21 @@
+As práticas recomendadas e configurações necessárias para garantir conformidade com a LGPD em Amazon S3 e Redshift, podem ser descritas como:
+  1- Controle de acesso apropriado 
+  S3:
+      - Políticas de bucket. Garantir que somente usuários ou roles específicas da AWS possam acessar os buckets e objetos.
+      - Políticas de IAM (Identity and Access Management). Utilize IAM roles e conceder o menor privilégio necessário para desempenho das funções.
+      - Controle de acesso baseado em objetos (Object-level permissions). Aplicar permissões a nível do objeto, garantindo acesso apenas a partes específicas de dados dentro de um bucket. 
+  Redshift:
+      - Políticas de IAM. Utilizar Redshift IAM roles para controlar o acesso a clusters, operações e tabelas.
+      - Controle granular de acesso com GRANT/REVOKE. Utilizados para definir permissões detalhadas para tabelas, esquemas e funções específicas dentro do banco de dados. 
+
+  2- Criptografia de dados em repouso e em trânsito
+     Criptografia em Repouso:
+      S3: oferece duas opções principais: criptografia do lado do servidor (SSE) e criptografia com KMS (Key Management Service).
+      Redshift: oferece a criptografia com KMS para gerenciar as chaves.
+     Criptografria em Trânsito:
+      S3: utilizar HTTPS ou certificados SSL/TLS, para garantir que a comunicação entre os clientes e o S3 esteja protegida.
+      Redshift: utiliza os certificados SSL/TLS para criptografar dados em trânsito entre os clientes e o cluster.
+
+    3- Logs Detalhados de Acesso e Auditoria
+      S3: Utilizar o CloudTrail para registrar todas as chamadas de API feitas para o S3, permitindo auditar quem acessou cada objeto. Além disso, é possível configuar o S3 Server Access Logs, que registra todos os logs de solicitações feitas ao bucket.
+      Redshift: Utilizar o CloudTrail, que também registra eventos do Redshift. Além disso, o Redshift mantém logs detalhados em tabelas de sistema, onde pode ser visualizadas todas as consultas SQL executadas, identificar usuários que executaram essas consultas e os parâmetros utilizados.
