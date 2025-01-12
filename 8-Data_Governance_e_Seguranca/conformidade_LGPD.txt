@@ -1,0 +1,7 @@
+Para verificar se a empresa está em conformidade com as regulamentações de proteção de dados envolve analisar algumas práticas como:
+  1- Política de Privacidade e Termos de Uso. Avaliar a existência e clareza da política que deve explicar como os dados pessoais são coletados, armazenados, usados e compartilhados. Mais ainda, deve informar sobre o consentimento do usuário.
+  2- Mapeamento de Dados Pessoais. A empresa deve ter um mapeamento detalhado de todos os dados pessoais coletados, sendo estes classificados conforme criticidade.
+  3- Direitos dos Titulares. A empresa deve ter um canal de fácil acesso para os titulares exercerem seus direitos de corrigir, excluir ou se opor ao tratamento dos dados.
+  4- Contratos com Terceiros. Caso a empresa compartilhe dados pessoais com terceiros, ele deve garantir que os terceiros também estão em conformidade com a LGPD.
+  5- Segurança da Informação. A empresa deve adotar medidas técnicas adequadas para proteger os dados contra acessos não autorizado e vazamentos.
+  
