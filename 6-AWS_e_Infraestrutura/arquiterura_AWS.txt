@@ -1,0 +1,19 @@
+Uma arquitetura AWS que realize ingestão em tempo real utilizando Kinesis, processamento usando Lambda e armazenamento utilizando S3, pode ser descrita como:
+1. Kinesis Data Streams, para ingestão e transmissão de dados em tempo real. 
+  - O Kinesis recebe e transmite dados de forma contínua e em tempo real, podendo lidar com múltiplos produtores (fontes de dados) e consumidores (processadores de dados) simultaneamente. 
+  - Os dados podem ser segmentados em shards, facilitando a escalabilidade por distribuição paralela.
+2. AWS Lambda, para processar, em tempo real, os dados que chegam ao Kinesis.
+  - O Lambda deve ser configurado para consumir os dados do Kinesis de forma automática, assim que estes chegam ao Kinesis, processando-os em tempo real, realizando transformações, filtros, ou cálculos.
+3. Amazon S3, para armazenamento dos dados processados.
+  - Os dados processados devem ser armazenados de forma íntegra e escalável no S3, utilizando formatos eficientes como Parquet, JSON ou CSV. Os dados devem organizados em pastas ou arquivos específicos para fácil acesso. Logo, o S3 pode servir como fonte para análises mais profundas.
+
+Essa arquitetura possui vários benefícios como escalabilidade, baixa latência e armazenamento durável e de baixo custo. 
+
+Para lidar com picos de tráfeco podemos aplicar as seguintes técnicas:
+  1. Dimensionamento dos shards do Kinesis
+    Configurar um processo automatizado (scripts Lambda ou AWS Auto Scaling) para ajustar o número de shards durante picos de tráfego, com base em métricas do CloudWatch como 'GetRecordsIteratorAge', tempo de latência na leitura, e 'IncomingRecords' referenteme ao volume de dados recebidos.
+  2. Ajuste da concorrências do AWS Lambda
+    Como o AWS Lambda escala automaticamente de acordo com o número de eventos do Kinesis, devemos aumentar o limite de concorrência, que é o número máximo de execuções simultâneas, quando necessário para evitar falhas. 
+  Caso aconteça alguma falha, podemos envia-lás para uma Dead Letter Queue (DLQ) para posterior reprocessamento.
+  3. Monitoramento e alertas
+    Realizar monitoramento pelo CloudWatch e configurar alarmes que identifiquem sobrecargas no processo, são ideias para se ter visibilidade dos picos de tráfego e conseguir garantir uma arquitetura bem dimensionada.
