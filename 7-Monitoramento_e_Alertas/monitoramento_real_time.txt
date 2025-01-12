@@ -1,0 +1,17 @@
+Uma solução para implementar monitoramento e alertas em tempo real para um pipeline de dados que falha esporadicamente pode ser feita utilizando ferramentas como AWS CloudWatch, Airflow, Datadog ou Prometheus & Grafana. 
+Essas ferramentas coletam métricas e logs, oferecendo alertas em tempo real e possibilidade de criar painéis de visualização baseado nesses dados.
+Algumas métricas importantes para serem medidas e fonte de alertas são:
+  - Tempo de Execução (latência). Ajuda a identificar gargalos e a garantir que o pipeline está funcionando de maneira eficiente.
+  - Taxa de Sucesso/Falhas. Acompanhar a quantidade de jobs ou tarefas que foram concluídas com sucesso e aquelas que falharam.
+  - Desempenho de Recursos. Monitorar o uso de recursos (CPU, memória, armazenamento) durante a execução do pipeline para evitar sobrecarga nos sistemas.
+  - Volume e integridade dos Dados. Verificar quantidade de dados processados, dados atualizados e coerentes entre fonte e destino, e consistência dos dados, como verificações de nulos ou duplicidade.
+  - Logs e Mensagens de Erro. Os logs devem ser o mais detalhados possíveis para possibilitar rápida identificação do ponto de falha.
+Os alertas devem ser baseados em threshold dessas métricas, enviados por email ou outro canal de comunicação, e especificar uma criticidade para essa falha (baixa, média, alta). Além disso, pode-se programar ações corretivas para falhas específicas, como retries.
+
+Para configurar alertas no CloudWatch deve-se:
+  1- Acessar o console do CloudWatch
+  2- Criar um alarme
+  3- Escolher a métrica ideal para acionar o alerta
+  4- Definir condições do alarme. Definir threshold e período de scan.
+  5- Configurar ação do alarme. Enviar notificação via SNS (Simple Notification Service) ou ativar alguma ação, como auto-scaling, por exemplo.
+Assim, é possível monitorar a saúde da arquitetura do pipeline e ser alertado de rapidamente de problemas, em tempo real.
