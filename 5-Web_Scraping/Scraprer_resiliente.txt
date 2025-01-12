@@ -1,0 +1,12 @@
+Para configurar um scraper resiliente para evitar bloqueios é necessário utilizar técnicas que 'imitem' o comportamento de um usuário comum, protegendo o scraper de ser identificado como um bot e lidando com bloqueios temporários.
+Entre essas técnicas podemos incluir:
+1. Uso de Proxies e Rotação de IPs
+  Utilizar uma rede de proxies para alternar o endereço IP com o qual seu scraper se conecta ao site. Isso evita que o site bloqueie um único IP devido a acessos excessivos. Também, utilizar proxies de diferentes localizações geográficas para simular acessos de diferentes regiões, evitando padrões de comportamento que podem ser facilmente detectados como automáticos.
+2. Uso de Cabeçalhos HTTP Realistas
+  Pode-se variar o valor do User-Agent para simular diferentes navegadores e incluir o cabeçalho Referer para parecer que o acesso vem de uma navegação legítima.
+3. Controlar a taxa de requisição
+  Introduzir pausas aleatórias entre as requisições para simular um comportamento mais realístico.  
+4. Evitar Detecção de Bot pelo Captcha
+  Utilizar serviços de resolução de CAPTCHA, como 2Captcha, para contornar a verificação.
+5. Monitoramento de Status
+  Realizando o monitoramento dos códigos de status HTTP (e.g., 403, 404, 429, etc.) pode-se ajustar o comportamento do scraper conforme resultado. Ex: se erro 404 - IP bloqueado, pode-se fazer a rotação do IP.
