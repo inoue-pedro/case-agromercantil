@@ -1,0 +1,8 @@
+Uma política de gerenciamento de ciclo de vida eficiente deve regular a retensão, arquivamento, transformação e exclusão dos dados. Visando reduzir os custos e melhorar o desempenho do banco.
+Um modelo padrão de ciclo de vida dos dados em um data lake deve seguir as seguintes fases:
+  1- Ingestão de dados. Carregar os dados de várias fontes, podendo ser necessário transformações de agregação ou enriquecimento. 
+  2- Armazenamento e Organização. Organizar os dados para facilitar o acesso e uso eficiente, usando particionamento, armazenmanto em camadas (hot warm ou cold) e catalogação.
+  3- Acesso e Uso. Garantir que os dados sejam coerentes e acessíveis para análises, considerando políticas de acesso e monitoramento de qualidade.
+  4. Arquivamento. Seria o armazenamento a longo prazo de dados que não são mais acessados com muita frequência, dependendo do negócio, dados de 3 a 5 anos atrás. Esses devem estar na camada fria, com baixo custo de armazenamento.
+  5- Exclusão de dados. Somente quando estes não forem mais necessários. 
+Todo esse modelo deve ser monitorado atráves de relat´órios de conformidade que indiquem que a política definida esteja sendo corretamente aplicada.
