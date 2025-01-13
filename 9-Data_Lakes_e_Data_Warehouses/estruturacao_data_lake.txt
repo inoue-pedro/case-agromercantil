@@ -1,0 +1,5 @@
+Estruturar os dados no Data Lake em S3 requer algumas boas práticas de organização para permitir consultas rápidas e análises de alto desempenho, tais como:
+    - Utilizar particionamento de dados. Ótima estratégia para otimizar a performance ao ler os dados brutos.
+    - Utilizar formato de arquivos eficientes, como parquet ou orc, pois são compactados e permitem uma leitura eficiente.
+    - Utilização de diretórios e prefixos. Organizando os dados em subpastas, facilita a identificação para leitura.
+  
